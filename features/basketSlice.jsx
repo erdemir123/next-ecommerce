@@ -9,16 +9,19 @@ const basketSlice = createSlice({
   initialState,
   reducers: {
     addBasket: (state, { payload }) => {
-      state.basket = [...state, payload];
-      localStorage.setItem("basket",JSON.stringify("state.basket"))
+      state.basket = [...(state.basket.filter((item)=>item.id!==payload.id)), payload];
+      localStorage.setItem("basket",JSON.stringify(state.basket))
     },
     removeBasket: (state, { payload }) => {
-      state.basket = [...(state.map((item)=>item.id!==payload.id))];
-      localStorage.setItem("basket",JSON.stringify("state.basket"))
+      state.basket = [...(state.basket.filter((item)=>item.id!==payload.id))];
+      localStorage.setItem("basket",JSON.stringify(state.basket))
     },
+    clearBasket:(state,{payload})=>{
+      state.basket=[]
+    }
   },
 });
 
-export const {addBasket,removeBasket} = basketSlice.actions;
+export const {addBasket,removeBasket,clearBasket} = basketSlice.actions;
 
 export default basketSlice.reducer;
