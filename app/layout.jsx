@@ -1,3 +1,7 @@
+"use client"
+import { store } from '../reduxStore/store'
+import { Provider } from "react-redux"
+import Navbar from "../components/Navbar"
 import './globals.css'
 
 export default function RootLayout({ children }) {
@@ -8,7 +12,12 @@ export default function RootLayout({ children }) {
         head.jsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>{children}</body>
+
+      <body>
+        <Provider store={store}>
+          <Navbar />
+        {children}
+          </Provider></body>
     </html>
   )
 }
